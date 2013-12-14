@@ -6,8 +6,8 @@
 
 		<title>reveal.js - The HTML Presentation Framework</title>
 
-		<meta name="description" content="Description">
-		<meta name="author" content="Author">
+		<meta name="description" content="Presentation about Apache Camel and EIP">
+		<meta name="author" content="Matt Payne">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -15,7 +15,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 		<link rel="stylesheet" href="css/reveal.min.css">
-		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+		<link rel="stylesheet" href="css/theme/night.css" id="theme">
 
 		<!-- For syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -33,10 +33,37 @@
 	<body>
 
 		<div class="reveal">
-            <div class="slides"><section><h1>Slideshow</h1><img src="assets/logo.gif" alt="logo"/></section><section><h2>Title</h2><pre class="fragment"><code data-trim="data-trim" contenteditable="contenteditable">$.when(that(), other())
+            <div class="slides"><section><section data-state="index-slide" class="index-section"><h2>Apache Camel</h2><div>an introduction </div><div>by Matt Payne</div><div>2/15/2014 (target date)</div><ul><h6>Updated Fri Dec 13 20:23:12 CST 2013</h6></ul><div><img src="assets/camel-box-small.png" alt="camel box logo"/></div></section><section><ul><li>These slides are up on GitHub!  </li></ul><ul><li> <a href="http://payne.github.io/CamelIntro2014" target="_blank">payne.github.io/CamelIntro2014</a></li><li>Source for these slides is also on GitHub </li><ul> <li><a href="https://github.com/payne/CamelIntro2014" target="_blank">github.com/payne/CamelIntro2014</a></li></ul></ul></section><section><h2>About Me</h2><ul><li> 
+Software Engineer at <a href="http://www.Solutionary.com" target="_blank">Solutionary</a></li><li> <a href="https://twitter.com/MattPayneOrg" target="_blank">@MattPayneOrg</a></li><li> <a href="http://github.com/payne/" target="_blank">github.com/payne</a></li><li> <a href="http://MattPayne.org/" target="_blank">MattPayne.org</a></li><li>Payne@MattPayne.org</li></ul></section></section><section><section><h2>e.g. 1: Hello Camel </h2><pre><code data-trim="data-trim" contenteditable="contenteditable">CamelContext context = new DefaultCamelContext();
+context.addRoutes(new RouteBuilder() {
+  public void configure() {
+    // noop is true, so files are not deleted after being processed
+    from("file:data/inbox?noop=true").to("file:data/outbox");
+  }
+});
+
+// start the route and let it do its work
+context.start();
+// There is a better way to start camel show later
+Thread.sleep(10000);
+
+// stop the CamelContext
+context.stop();</code></pre><ul><li>Instead of maven, let's use gradle.  Here are the dependencies</li></ul><pre><code data-trim="data-trim" contenteditable="contenteditable">dependencies {
+  compile 'org.apache.camel:camel-core:2.12.2'
+}</code></pre><ul><li>This whole hello world project is at http://xyzzyURL</li></ul></section><section><h2>Demo 1</h2><pre> <put>demo 1 here....</put></pre></section></section><section><section> <h2>e.g. 2: Many routes can run at once</h2><pre><code data-trim="data-trim" contenteditable="contenteditable">context.addRoutes(new RouteBuilder() {
+  public void configure() {
+    Processor processor=new MattProcessorForJetty();
+    from("jetty:http://0.0.0.0:9876/myapp?matchOnUriPrefix=true")
+      .process(processor).to("file:data/outbox");
+  }
+});</code></pre></section><section><h3>Processor classes</h3><p><Classes>implementing the Processor interface can access and change anything about the exchange</Classes><at>that step in the route.</at></p><h3>Exchange </h3><p>Exchanges contain....</p></section><section><h2>Demo 2</h2><pre><code data-trim="data-trim" contenteditable="contenteditable">tree
+gradle
+tree</code></pre></section></section><section> <section><h2>Endpoints</h2></section></section><section><section><h2>Many ways to run camel</h2><ol><li>Stand alone main</li><li>In a WAR</li><li>In JBoss </li></ol></section><section><h2>Stand alone main</h2><pre><code data-trim="data-trim" contenteditable="contenteditable">3.jade</code></pre></section><section><h2>In a WAR</h2><pre><code data-trim="data-trim" contenteditable="contenteditable">4.jade</code></pre></section><section><h2>In JBoss</h2><pre><code data-trim="data-trim" contenteditable="contenteditable">5.jade</code></pre></section></section><section> <section><h2>Using beans</h2></section></section><section> <section><h2>Error handling</h2></section></section><section> <section><h2>Enterprise integration patterns</h2></section><section><h2>Aggregator</h2></section><section><h2>Splitter</h2></section><section><h2>Routing Slip</h2></section><section><h2>Dynamic Router</h2></section><section><h2>Load Balancer</h2></section></section><section><h2>Code demo</h2><pre><code data-trim="data-trim" contenteditable="contenteditable">$.when(that(), other())
     .done(okay)
     .fail(notOkay);
-    </code></pre></section><section><h2>The End</h2></section>    </div>
+    </code></pre></section><section><h2>Code demo two</h2><pre><code data-trim="data-trim" contenteditable="contenteditable">$.when(that(), other())
+   .done(okay)
+   .fail(notOkay);</code></pre></section><section><h2>The End</h2></section><section> <h2>Many thanks to:</h2><ol><li>Peter Ajtai for </li><a href="https://github.com/pajtai/grunt-reveal-jade" target="_blank">github.com/pajtai/grunt-reveal-jade</a><li>Jeff Sheets for the inspiration in<a href="http://jeffsheets.github.io/JavaTesting2013Slides" target="_blank">jeffsheets/JavaTesting2013Slides</a></li></ol></section>    </div>
 </div>
 
 <script src="lib/js/head.min.js"></script>
@@ -52,7 +79,7 @@
         history: true,
         center: true,
 
-        theme: Reveal.getQueryHash().theme || "default", // available themes are in /css/theme
+        theme: Reveal.getQueryHash().theme || "night", // available themes are in /css/theme
         transition: Reveal.getQueryHash().transition || "default" || 'default', // default/cube/page/concave/zoom/linear/none
 
         // Optional libraries used to extend on reveal.js
